@@ -1,5 +1,6 @@
 # penumbra-crypto
 
+[![npm](https://img.shields.io/npm/v/@penumbra-tools/crypto)](https://www.npmjs.com/package/@penumbra-tools/crypto)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 Client-side end-to-end encryption library using the Web Crypto API.
