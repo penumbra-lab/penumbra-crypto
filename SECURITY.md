@@ -189,6 +189,41 @@ This prevents JavaScript (including XSS attacks) from reading raw key bytes.
 - Invalid data is rejected before decryption attempts
 - No timing-based information leakage (Web Crypto is constant-time)
 
+## Design Rationale
+
+### Why Web Crypto API Only?
+
+This library deliberately uses only the browser's native Web Crypto API with no external dependencies:
+
+- **Auditability**: Less code to review; the cryptographic primitives are browser-implemented
+- **No supply chain risk**: No npm dependencies that could be compromised
+- **Performance**: Native implementations are optimized and constant-time
+- **Broad support**: Works in all modern browsers and Node.js 18+
+
+### Why PBKDF2 instead of Argon2id?
+
+Argon2id is the current best practice for password hashing because it's memory-hard (resistant to GPU/ASIC attacks). However, **the Web Crypto API does not support Argon2id**.
+
+Using PBKDF2 is a deliberate tradeoff:
+- **Pro**: Zero dependencies, native browser support, well-audited
+- **Con**: More vulnerable to GPU-based brute-force attacks
+
+**Mitigations**:
+- Use strong passphrases (12+ characters, mixed case/numbers/symbols)
+- Increase iteration count for high-security applications
+- The 100k iteration default is a balance; consider 600k+ per OWASP
+
+### Why P-256 instead of X25519/Ed25519?
+
+Curve25519 is preferred by many in the privacy community for its simpler implementation and resistance to certain implementation errors. However, **the Web Crypto API does not support Curve25519**.
+
+P-256 (secp256r1) tradeoffs:
+- **Pro**: NIST-standardized, widely audited, universal browser support
+- **Con**: More complex implementation (though we use the browser's, not our own)
+- **Con**: Some distrust NIST curves due to parameter selection process
+
+Both curves provide ~128 bits of security. The practical difference is minimal for most threat models.
+
 ## Compliance
 
 This implementation aligns with:

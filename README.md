@@ -4,6 +4,14 @@
 
 Client-side end-to-end encryption library using the Web Crypto API.
 
+## What This Protects
+
+This library encrypts data **client-side** before it leaves the browser. The server never sees your plaintext data or encryption keys.
+
+**Protects against:** Server compromise, database theft, man-in-the-middle attacks, and unauthorized data access by service operators.
+
+**Does NOT protect against:** Compromised browser/device, malicious JavaScript served by the host, weak passphrases, or endpoint security failures. See [SECURITY.md](./SECURITY.md) for the full threat model.
+
 ## Features
 
 - **PBKDF2 key derivation** - Derive encryption keys from passphrases
@@ -162,6 +170,18 @@ See [SECURITY.md](./SECURITY.md) for:
 | Key Derivation | PBKDF2-SHA256 (100k iterations) |
 | Encryption | AES-256-GCM |
 | Key Exchange | ECDH P-256 + HKDF |
+
+## Design Decisions
+
+This library uses only the [Web Crypto API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API) with no external dependencies. This constrains algorithm choices but ensures broad compatibility and auditability.
+
+| Choice | Why | Tradeoff |
+|--------|-----|----------|
+| **PBKDF2** over Argon2id | Web Crypto API doesn't support Argon2id | PBKDF2 is more GPU-parallelizable; mitigate with higher iterations and strong passphrases |
+| **P-256** over X25519 | Web Crypto API doesn't support Curve25519 | P-256 is NIST-standardized and widely audited; some prefer Curve25519's simpler implementation |
+| **100k iterations** | Balance of security and UX on mobile | Increase for high-security applications; OWASP suggests 600k+ |
+
+See [SECURITY.md](./SECURITY.md) for detailed cryptographic rationale.
 
 ## Browser Support
 
