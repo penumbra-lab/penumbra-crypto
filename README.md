@@ -24,13 +24,13 @@ This library encrypts data **client-side** before it leaves the browser. The ser
 ## Installation
 
 ```bash
-npm install penumbra-crypto
+npm install @penumbra-tools/crypto
 ```
 
 ## Quick Start
 
 ```typescript
-import { KeyManager, generateECDHKeyPair } from 'penumbra-crypto';
+import { KeyManager, generateECDHKeyPair } from '@penumbra-tools/crypto';
 
 // Initialize with user's passphrase
 const keyManager = new KeyManager();
@@ -48,7 +48,7 @@ const decrypted = await keyManager.decrypt(encrypted);
 ### Key Derivation
 
 ```typescript
-import { deriveKey } from 'penumbra-crypto';
+import { deriveKey } from '@penumbra-tools/crypto';
 
 // Derive AES-256 key from passphrase
 const salt = crypto.getRandomValues(new Uint8Array(16));
@@ -58,7 +58,7 @@ const key = await deriveKey('my-passphrase', salt);
 ### Symmetric Encryption
 
 ```typescript
-import { encrypt, decrypt } from 'penumbra-crypto';
+import { encrypt, decrypt } from '@penumbra-tools/crypto';
 
 // Encrypt any JSON-serializable data
 const encrypted = await encrypt({ message: 'Hello' }, key);
@@ -75,7 +75,7 @@ import {
   deriveConversationKey,
   encryptForConversation,
   decryptFromConversation
-} from 'penumbra-crypto';
+} from '@penumbra-tools/crypto';
 
 // Generate key pair
 const { publicKeyJwk, privateKeyJwk } = await generateECDHKeyPair();
@@ -103,7 +103,7 @@ import {
   generateGroupKey,
   encryptGroupKeyForMember,
   decryptGroupKey
-} from 'penumbra-crypto';
+} from '@penumbra-tools/crypto';
 
 // Owner creates group key
 const groupKey = await generateGroupKey();
@@ -128,7 +128,7 @@ const memberGroupKey = await decryptGroupKey(
 High-level key management:
 
 ```typescript
-import { KeyManager } from 'penumbra-crypto';
+import { KeyManager } from '@penumbra-tools/crypto';
 
 const km = new KeyManager();
 
