@@ -1,6 +1,6 @@
 {
   "name": "@penumbra-tools/crypto",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Client-side E2E encryption library using Web Crypto API. PBKDF2 key derivation, AES-GCM encryption, ECDH key exchange, and group key management.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -34,7 +34,7 @@
     "ecdh",
     "cryptography"
   ],
-  "author": "",
+  "author": "Penumbra Tools",
   "license": "MIT",
   "repository": {
     "type": "git",
