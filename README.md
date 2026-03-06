@@ -181,6 +181,8 @@ This library uses only the [Web Crypto API](https://developer.mozilla.org/en-US/
 | **P-256** over X25519 | Web Crypto API doesn't support Curve25519 | P-256 is NIST-standardized and widely audited; some prefer Curve25519's simpler implementation |
 | **100k iterations** | Balance of security and UX on mobile | Increase for high-security applications; OWASP suggests 600k+ |
 
+**On iteration count**: The `PBKDF2_ITERATIONS` constant is exported—fork or wrap the library to increase it for your deployment. A future v2 may add an optional WASM Argon2id fallback for applications that can accept the dependency.
+
 See [SECURITY.md](./SECURITY.md) for detailed cryptographic rationale.
 
 ## Browser Support
