@@ -79,9 +79,11 @@ describe('Base64 Utilities', () => {
   });
 
   it('should handle large arrays without stack overflow', () => {
-    // Create a large array (100KB)
+    // Create a large array (100KB) - fill manually since getRandomValues has 64KB limit
     const largeArray = new Uint8Array(100 * 1024);
-    crypto.getRandomValues(largeArray);
+    for (let i = 0; i < largeArray.length; i++) {
+      largeArray[i] = i % 256;
+    }
 
     const encoded = bytesToBase64(largeArray);
     const decoded = base64ToBytes(encoded);

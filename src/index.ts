@@ -149,7 +149,7 @@ export async function deriveKey(
   return crypto.subtle.deriveKey(
     {
       name: 'PBKDF2',
-      salt: salt,
+      salt: salt as BufferSource,
       iterations: PBKDF2_ITERATIONS,
       hash: 'SHA-256',
     },
@@ -466,7 +466,7 @@ export async function exportGroupKey(groupKey: CryptoKey): Promise<Uint8Array> {
 export async function importGroupKey(keyBytes: Uint8Array): Promise<CryptoKey> {
   return crypto.subtle.importKey(
     'raw',
-    keyBytes,
+    keyBytes as BufferSource,
     { name: 'AES-GCM', length: KEY_LENGTH },
     false, // Not extractable after import
     ['encrypt', 'decrypt']
