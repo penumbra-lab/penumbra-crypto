@@ -1,0 +1,56 @@
+{
+  "name": "penumbra-crypto",
+  "version": "1.0.0",
+  "description": "Client-side E2E encryption library using Web Crypto API. PBKDF2 key derivation, AES-GCM encryption, ECDH key exchange, and group key management.",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "src",
+    "SECURITY.md"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint src test",
+    "prepublishOnly": "npm run build && npm run test"
+  },
+  "keywords": [
+    "encryption",
+    "e2e",
+    "end-to-end",
+    "webcrypto",
+    "aes-gcm",
+    "pbkdf2",
+    "ecdh",
+    "cryptography"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://codeberg.org/penumbra/penumbra-crypto.git"
+  },
+  "homepage": "https://codeberg.org/penumbra/penumbra-crypto",
+  "bugs": {
+    "url": "https://codeberg.org/penumbra/penumbra-crypto/issues"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
